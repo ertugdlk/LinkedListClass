@@ -81,17 +81,41 @@ public class AlgorithmQuestions {
         return list3;
     }
 
+    // lower space complexity then sumReverseLists()
+    public static LinkedList sumReverseListsOptimization(LinkedList list1, LinkedList list2) {
+        Node currNode1 = list1.head;
+        Node currNode2 = list2.head;
+        int overplus = 0;
+        int value = 0;
+        LinkedList sumlist = new LinkedList();
+
+        while (currNode1 != null && currNode2 != null) {
+            value = currNode1.value + currNode2.value;
+
+            if (value >= 10) {
+                overplus = value % 10;
+            }
+
+            sumlist.insert(sumlist, value + overplus);
+            currNode1 = currNode1.next;
+            currNode2 = currNode2.next;
+            overplus = 0;
+        }
+        return sumlist;
+    }
+
     public static void main(String[] args) {
         LinkedList newlist = new LinkedList();
-        newlist = LinkedList.insert(newlist, 1);
-        newlist = LinkedList.insert(newlist, 1);
+        newlist = LinkedList.insert(newlist, 3);
+        newlist = LinkedList.insert(newlist, 4);
         newlist = LinkedList.insert(newlist, 1);
         LinkedList newlist2 = new LinkedList();
         newlist2 = LinkedList.insert(newlist2, 1);
-        newlist2 = LinkedList.insert(newlist2, 1);
+        newlist2 = LinkedList.insert(newlist2, 4);
         newlist2 = LinkedList.insert(newlist2, 1);
 
-        LinkedList list = sumLists(newlist, newlist2);
+        // LinkedList list = sumReverseLists(newlist, newlist2);
+        LinkedList list = sumReverseLists(newlist, newlist2);
         LinkedList.printList(list);
     }
 
