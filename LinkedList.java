@@ -2,6 +2,7 @@ package LinkedList;
 
 public class LinkedList {
     Node head;
+    Node last;
 
     static class Node {
         Node next;
@@ -29,6 +30,7 @@ public class LinkedList {
                 last = last.next;
             }
             last.next = newNode;
+            list.last = newNode;
         }
 
         return list;

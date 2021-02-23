@@ -1,5 +1,7 @@
 package LinkedList;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -104,6 +106,38 @@ public class AlgorithmQuestions {
         return sumlist;
     }
 
+    public static LinkedList partition(LinkedList list, int partition) {
+        // create currNode to list's head
+        Node currNode = list.head;
+
+        // create two linkedlists for track smaller and bigger ndoes
+        LinkedList biggerList = new LinkedList();
+        LinkedList smallerList = new LinkedList();
+
+        // check main list for values
+        while (currNode != null) {
+            int value = currNode.value;
+
+            // if value bigger than partition save it to biggerlist else save it to
+            // smallerList
+            if (currNode.value >= partition) {
+                biggerList = LinkedList.insert(biggerList, value);
+            } else {
+                smallerList = LinkedList.insert(smallerList, value);
+            }
+            currNode = currNode.next;
+        }
+
+        // connect two linkedlists
+        if (smallerList.last == null) {
+            smallerList.head.next = biggerList.head;
+        } else {
+            smallerList.last.next = biggerList.head;
+        }
+
+        return smallerList;
+    }
+
     public static void main(String[] args) {
         LinkedList newlist = new LinkedList();
         newlist = LinkedList.insert(newlist, 3);
@@ -117,6 +151,20 @@ public class AlgorithmQuestions {
         // LinkedList list = sumReverseLists(newlist, newlist2);
         LinkedList list = sumReverseLists(newlist, newlist2);
         LinkedList.printList(list);
+        /*
+         * ArrayList<Integer> array = new ArrayList<>(); array.add(0, 2);
+         * System.out.println(array.get(0));
+         */
+
+        System.out.println("-----");
+        LinkedList list1 = new LinkedList();
+        list1 = LinkedList.insert(list1, 4);
+        list1 = LinkedList.insert(list1, 2);
+        list1 = LinkedList.insert(list1, 1);
+        list1 = LinkedList.insert(list1, 5);
+        list1 = LinkedList.insert(list1, 3);
+        list1 = partition(list1, 4);
+        LinkedList.printList(list1);
     }
 
 }
